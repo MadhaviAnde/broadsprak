@@ -2,7 +2,7 @@ pipeline {
 agent any
     
     environment {
-        REPO = "docker.io/madhaviande/sample-repo'
+        REPO = "docker.io/madhaviande/sample-repo"
         REGESRT_CREDENTIAL = 'docker-hub-id'
         
         dockerImage = ''
