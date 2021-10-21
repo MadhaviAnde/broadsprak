@@ -1,0 +1,38 @@
+pipeline {
+agent any
+    
+    environment {
+        REPO = "docker.io/madhaviande/sample-repo'
+        REGESRT_CREDENTIAL = 'docker-hub-id'
+        
+        dockerImage = ''
+    }
+    
+     stages {
+     
+      stage('Building our image') {
+            steps {
+                script {
+                    sh 'docker info'
+                    dockerImage = docker.build ("${REPO}:${env.BUILD_ID}")
+                }
+            }
+        }
+        stage('Push Image To DockerHUB') {
+            steps {
+                script {
+                    docker.withRegistry( '', "${REGISRTY_CREDENTIAL}" ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+      
+
+}
+   
+}
+
+
+
+
