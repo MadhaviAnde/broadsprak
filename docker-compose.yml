@@ -1,27 +1,25 @@
-version: "3.0"
+ version: "3.0"
 
-services:
+ services:
 
-  jenkins:
+        jenkins:
 
-    container_name: jenkins
+         container_name: jenkins
 
-    user: 0:992
+         user: 1000:992
 
-   
+         image: jenkins/jenkins:alpine
 
-    image: jenkins/jenkins:alpine
+       ports:
 
-    ports:
+         - 50000:50000
 
-    - 50000:50000
-
-    - 8080:8080
+         - 8080:8080
 
     volumes:
 
-    - /home/ec2-user:/var/jenkins_home:rw
+    - ./jenkins-data:/var/jenkins_home:rw
 
-    - /home/ec2-user/local/bin/docker:/usr/bin/docker
+    - /usr/bin/docker:/usr/bin/docker
 
-    - /home/ec2-user/home/ec2-user/run/docker.sock:/var/run/docker.sock
+    - /var/run/docker.sock:/var/run/docker.sock
