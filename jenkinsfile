@@ -1,27 +1,43 @@
 pipeline {
-agent any
-    
+    agent any
     environment {
-        REPO = "docker.io/madhaviande/sample-repo"
-        REGESRT_CREDENTIAL = 'docker-hub-id'
+        registry = 'docker.io/madhaviande/sample-repo'
+        registryCredential = 'docker-hub-id'
         
         dockerImage = ''
     }
     
      stages {
-     
+        stage('git') {
+            steps {
+                echo 'Hello World'
+               git branch: 'main', url:"https://github.com/MadhaviAnde/yuvan.git"
+            }
+        }
+        
+        stage('Dockerfile true'){
+            steps{
+                
+        echo 'docker file is there'
+                
+            }
+            
+        }
+       
+
+
       stage('Building our image') {
             steps {
                 script {
                     sh 'docker info'
-                    dockerImage = docker.build ("${REPO}:${env.BUILD_ID}")
+                    dockerImage = docker.build registry + ":v$BUILD_NUMBER"
                 }
             }
         }
         stage('Push Image To DockerHUB') {
             steps {
                 script {
-                    docker.withRegistry( '', "${REGISRTY_CREDENTIAL}" ) {
+                    docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
                     }
                 }
@@ -30,9 +46,12 @@ agent any
       
 
 }
+post{
+    
+    always{
+        emailext body: 'A test email', recipientProviders: [[$class:'DevelopersRecipientProvider']], subject: 'Test', to:'madhavilatha.ande@gmail.com'
+    }
+    
+}
    
 }
-
-
-
-
