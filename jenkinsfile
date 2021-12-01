@@ -11,7 +11,7 @@ pipeline {
         stage('git') {
             steps {
                 echo 'Hello World'
-               git branch: 'main', url:"https://github.com/MadhaviAnde/yuvan.git"
+               git branch: 'main', url:"https://github.com/MadhaviAnde/broadspark.git"
             }
         }
         
