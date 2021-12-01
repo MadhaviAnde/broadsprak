@@ -1,4 +1,4 @@
-FROM ubantu:18.04
+FROM ubuntu:18.04
 
 RUN apt-get updata -y && \
 apt-get install -y python-pip python dev
