@@ -2,9 +2,7 @@ FROM ubuntu:18.04
 
 LABEL maintainer="<madhaviande2014@gmail.com>"
 
-RUN apt-get update -y && \
-
-apt-get install -y python-pip python-dev
+RUN apt-get install -y python
 
 COPY ./requirements.txt /app/requirements.txt
 
