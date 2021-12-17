@@ -12,7 +12,7 @@ pipeline {
             steps{
                 
         script{
-              sh ' cd /home/ec2-user/mockserver/docs'
+              sh ' cd ..'
              sh 'docker-compose down '
              sh 'docker-compose up -d'
         
