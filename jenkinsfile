@@ -1,50 +1,27 @@
 pipeline {
     agent any
-    environment {
-        registry = 'docker.io/madhaviande/sample-repo'
-        registryCredential = 'docker-hub-id'
-        
-        dockerImage = ''
-    }
-    
      stages {
         stage('git') {
             steps {
                 echo 'Hello World'
-               git branch: 'main', url:"https://github.com/MadhaviAnde/broadsprak.git"
+               git branch: 'main', url:"https://github.com/BroadSparkDev/docs.git"
             }
         }
         
-        stage('Dockerfile true'){
+        stage('Dockercompose'){
             steps{
                 
-        echo 'docker file is there'
-                
+        script{
+              sh 'cd /home/ec2-user/mockserver/docs'
+             sh 'docker-compose down '
+             sh 'docker-compose up -d'
+        
             }
+                
+           }
             
         }
        
-
-
-      stage('Building our image') {
-            steps {
-                script {
-                    sh 'docker info'
-                    dockerImage = docker.build registry + ":v$BUILD_NUMBER"
-                }
-            }
-        }
-        stage('Push Image To DockerHUB') {
-            steps {
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
-      
-
 }
 post{
     
