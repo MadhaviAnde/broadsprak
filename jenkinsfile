@@ -12,7 +12,7 @@ pipeline {
             steps{
                 
         script{
-              sh ' cd ..' 
+               
               sh 'pwd '
              sh 'docker stop 0f57df401d84 '
              sh 'docker-compose up -d'
