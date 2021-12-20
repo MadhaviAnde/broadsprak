@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment{
+    path = path:$/user/bin/
+    
+    
+    }
      stages {
         stage('git') {
             steps {
@@ -15,7 +20,7 @@ pipeline {
                
               sh 'pwd '
              
-             sh 'docker-compose up -d'
+             sh '/usr/bin/docker-compose --build up -d'
         
             }
                 
