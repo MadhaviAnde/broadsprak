@@ -18,7 +18,7 @@ pipeline {
               sh 'docker info'
                sh 'docker-compose down'
              
-             sh 'docker-compose up --no-recreate'
+             sh 'docker-compose up '
              
         
             }
