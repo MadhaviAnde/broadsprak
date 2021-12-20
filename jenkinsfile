@@ -15,6 +15,7 @@ pipeline {
         script{
                
               sh 'pwd '
+              sh 'docker info'
              
              
              sh 'docker-compose up -d'
