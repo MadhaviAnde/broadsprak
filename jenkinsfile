@@ -15,7 +15,7 @@ pipeline {
         script{
                
               sh 'pwd '
-              sh 'cat docker-compose.yml'
+              sh 'docker-compose down'
              
              sh 'docker-compose up -d'
         
