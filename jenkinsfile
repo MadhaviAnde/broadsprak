@@ -19,6 +19,7 @@ pipeline {
         script{
                
               sh 'pwd '
+              sh 'cat docker-compose.yml'
              
              sh '/usr/bin/docker-compose --build up -d'
         
