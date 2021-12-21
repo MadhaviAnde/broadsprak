@@ -18,6 +18,7 @@ pipeline {
               sh 'docker info'
               
                sh 'docker-compose down'
+               sh 'docker container prune'
              
              sh 'docker-compose up -d'
              
