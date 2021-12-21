@@ -1,19 +1,30 @@
-version: "3.3"
-services:
-  swagger-ui:
-    container_name: swagger-ui
-    image: swaggerapi/swagger-ui
-    ports:
-      - 36000:8080
-    environment:
-      - "SWAGGER_JSON=/apis/index.yaml"
-    volumes:
-    - ./apis:/apis:ro
-  prism:
-    image: stoplight/prism:4
-    command: 'mock -h 0.0.0.0 /apis/index.yaml'
-    volumes:
-      - ./apis:/apis:ro
-    ports:
-      # Serve the mocked API locally as available on port 8080
-      - '37000:4010'
+version : "3.0"
+services :
+        jenkins:
+                container_name: jenkins
+                user: 1000:1000
+                
+                privileged: true
+               
+               
+               
+                image: jenkins/jenkins:alpine
+                ports:
+                        - 50000:50000
+                        - 8080:8080
+
+                volumes:
+                        - ./jenkins-data:/var/jenkins_home:rw
+                        - /usr/bin/docker:/usr/bin/docker
+                        - /usr/bin/docker-compose:/usr/bin/docker-compose:rw
+                        - /var/run/docker.sock:/var/run/docker.sock
+                        
+
+                        
+                deploy:
+
+                        resources:
+                                limits:
+                                        cpus: '0.5'
+                                        memory: 1024m
+                                        
