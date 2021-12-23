@@ -13,29 +13,16 @@ pipeline {
             steps{
                 
         script{
-               
-              sh 'pwd '
-              sh 'docker info'
+             sh 'docker-compose down'
               
-               sh 'docker-compose down'
-               sh 'docker container prune'
+              sh 'docker container prune'
              
              sh 'docker-compose up -d'
-             
-        
+           
             }
                 
            }
             
         }
-       
-}
-post{
-    
-    always{
-        emailext body: 'A test email', recipientProviders: [[$class:'DevelopersRecipientProvider']], subject: 'Test', to:'madhavilatha.ande@gmail.com'
     }
-    
-}
-   
 }
