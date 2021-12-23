@@ -11,18 +11,13 @@ pipeline {
         
         stage('Dockercompose'){
             steps{
-                
-        script{
-             sh 'docker-compose down'
-              
-              sh 'docker container prune'
-             
-             sh 'docker-compose up -d'
+                  script{
+                         sh 'docker-compose down'
+                         sh 'docker container prune'
+                         sh 'docker-compose up -d'
            
-            }
-                
-           }
-            
-        }
-    }
+                         }
+                }
+         }
+     }
 }
